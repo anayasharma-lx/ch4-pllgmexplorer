@@ -5,389 +5,327 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Area of Parallelogram — Ganita Prakash Grade 8</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --paper:#faf8f4; --paper2:#f3f0ea; --paper3:#e8e3d8;
-  --ink:#1c1a16;   --ink2:#4a4640;   --ink3:#8a8580;
-  --rule:#d4cfc5;
-  --teal:#1d6a72;  --teal-bg:#e8f4f5;
-  --rust:#b84a2a;  --rust-bg:#fdf0ec;
-  --gold:#c08030;  --gold-bg:#fdf5e8;
-  --sage:#3a6a48;  --sage-bg:#eaf2ec;
-  --font:'DM Sans',sans-serif;
-  --serif:'Lora',Georgia,serif;
-  --mono:'DM Mono',ui-monospace,monospace;
-  --shadow:0 2px 12px rgba(28,26,22,.08);
+  --sand:#f8f2e4;
+  --sand2:#f0e8d4;
+  --sand3:#e4d8c0;
+  --sand4:#d4c8a8;
+  --bark:#8a7050;
+  --bark2:#6a5038;
+  --ink:#2a1c08;
+  --ink2:#4a3820;
+  --ink3:#7a6848;
+  --rule:#c8b890;
+  --rule2:#e0d0b0;
+  --terracotta:#c04828;
+  --terracotta-bg:rgba(192,72,40,.1);
+  --forest:#2a6a3a;
+  --forest-bg:rgba(42,106,58,.1);
+  --gold:#b87820;
+  --gold-bg:rgba(184,120,32,.1);
+  --sky:#2858a0;
+  --sky-bg:rgba(40,88,160,.1);
+  --serif:'Instrument Serif',Georgia,serif;
+  --mono:'Space Mono',ui-monospace,monospace;
 }
-body{font-family:var(--font);background:var(--paper);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;padding:28px 20px 60px;line-height:1.6;background-image:radial-gradient(circle at 20% 30%,rgba(192,128,48,.04) 0,transparent 50%),radial-gradient(circle at 80% 70%,rgba(29,106,114,.04) 0,transparent 50%)}
-.app{max-width:860px;margin:0 auto}
+html,body{width:100%;height:100%;overflow:hidden}
+body{
+  font-family:var(--serif);
+  background:var(--sand);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;
+  position:fixed;inset:0;
+}
 
-.header{margin-bottom:24px;padding-bottom:18px;border-bottom:1.5px solid var(--rule)}
-.chapter-badge{display:inline-flex;align-items:center;gap:8px;background:var(--paper2);border:1.5px solid var(--rule);border-radius:20px;padding:4px 14px 4px 10px;font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
-.badge-num{width:22px;height:22px;border-radius:50%;background:var(--sage);color:#fff;font-size:12px;font-weight:700;font-family:var(--mono);display:flex;align-items:center;justify-content:center}
-h1{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-.3px;line-height:1.2;margin-bottom:5px}
-.header-sub{font-size:14px;color:var(--ink2);max-width:560px;line-height:1.55}
+/* construction paper texture */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
 
-.card{background:var(--paper);border:1.5px solid var(--rule);border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}
-.concept{background:var(--gold-bg);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:11px 16px;margin-bottom:20px;font-family:var(--serif);font-style:italic;font-size:14px;color:#4a3010;line-height:1.65}
-.concept strong{font-style:normal;font-weight:700;color:#3a2008}
+/* ── HEADER ── */
+.top{
+  position:relative;z-index:10;
+  border-bottom:2px solid var(--ink);
+  background:var(--sand2);
+  display:flex;align-items:stretch;
+  flex-shrink:0;
+}
+.top-left{
+  padding:10px 18px;border-right:1px solid var(--rule);
+  display:flex;flex-direction:column;justify-content:center;min-width:180px;
+}
+.top-ch{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);}
+.top-title{font-size:20px;font-weight:400;color:var(--ink)}
+.top-center{flex:1;padding:10px 20px;display:flex;align-items:center}
+.top-concept{
+  font-style:italic;font-size:13px;color:var(--ink3);
+  border-left:2px solid var(--terracotta);padding-left:12px;line-height:1.6;
+}
+.top-concept strong{font-style:normal;color:var(--terracotta);font-family:var(--mono);font-size:10px}
 
-/* Canvas wrap */
-.canvas-wrap{background:var(--paper2);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden;margin-bottom:16px;position:relative;cursor:crosshair;touch-action:none}
-#cvs{display:block;width:100%}
-.canvas-hint{position:absolute;bottom:8px;right:12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);background:rgba(250,248,244,.88);padding:3px 10px;border-radius:20px;border:1px solid var(--rule);pointer-events:none}
+/* ── MAIN ── */
+.main{
+  flex:1;display:grid;
+  grid-template-columns:1fr 220px;
+  overflow:hidden;min-height:0;
+  position:relative;z-index:5;
+}
 
-/* Stats row */
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-@media(max-width:480px){.stats-row{grid-template-columns:1fr 1fr}}
-.stat-card{background:#fff;border:1.5px solid var(--rule);border-radius:10px;padding:11px 13px}
-.stat-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ink3);margin-bottom:4px}
-.stat-val{font-family:var(--mono);font-size:20px;font-weight:800;line-height:1}
-.stat-card.area{border-color:#8abcaa;background:var(--sage-bg)}
-.stat-card.area .stat-val{color:var(--sage)}
-.stat-card.base .stat-val{color:var(--teal)}
-.stat-card.ht .stat-val{color:var(--gold)}
+/* ── CANVAS ── */
+.canvas-area{
+  overflow:hidden;background:var(--sand3);
+  cursor:crosshair;touch-action:none;
+  position:relative;
+}
+#cvs{display:block;width:100%;height:100%}
 
-/* Formula box */
-.formula-box{background:#fff;border:1.5px solid var(--rule);border-radius:10px;padding:13px 16px;margin-bottom:14px;font-family:var(--mono);font-size:13.5px;color:var(--ink2);line-height:1.9}
-.formula-box .eq{display:block;color:var(--sage);font-weight:700}
+/* ── RIGHT PANEL ── */
+.right{
+  border-left:1px solid var(--rule);
+  display:flex;flex-direction:column;
+  background:var(--sand2);
+  overflow:hidden;
+}
+.rp{padding:14px 14px;border-bottom:1px solid var(--rule2);flex-shrink:0}
+.rp-lbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:8px}
 
-/* Insight */
-.insight{background:var(--gold-bg);border:1px solid #e0c080;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 15px;font-size:13px;color:#6b4400;line-height:1.65}
-.insight strong{color:#4a2e00}
+/* stat cards */
+.stat{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:7px 10px;
+  background:var(--sand);border:1px solid var(--rule2);
+  margin-bottom:5px;
+}
+.stat:last-child{margin-bottom:0}
+.stat-label{font-size:11px;color:var(--ink3);font-family:var(--mono)}
+.stat-val{font-size:18px;font-weight:700;font-family:var(--mono)}
+.stat.area{background:var(--forest-bg);border-color:var(--forest)}
+.stat.area .stat-val{color:var(--forest)}
+.stat.base .stat-val{color:var(--terracotta)}
+.stat.ht .stat-val{color:var(--gold)}
+
+/* formula */
+.formula{
+  padding:12px 14px;
+  font-family:var(--mono);font-size:11px;color:var(--ink3);
+  line-height:1.8;border-bottom:1px solid var(--rule2);flex-shrink:0;
+}
+.formula strong{color:var(--forest);font-size:13px}
+
+/* insight */
+.insight{
+  padding:12px 14px;flex:1;overflow-y:auto;
+  font-style:italic;font-size:12px;color:var(--ink3);line-height:1.65;
+}
+.insight strong{font-style:normal;color:var(--terracotta);font-family:var(--mono);font-size:10px}
+
+/* hint */
+.hint{padding:8px 14px;border-top:1px solid var(--rule2);font-size:9px;color:var(--ink3);font-family:var(--mono);letter-spacing:.06em;flex-shrink:0}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="header">
-    <div class="chapter-badge"><div class="badge-num">4</div>Chapter 4 · Mensuration</div>
-    <h1>Area of a Parallelogram</h1>
-    <p class="header-sub">Drag the handles to reshape the parallelogram. The dashed rectangle always has the same area — shearing doesn't change it.</p>
+
+<div class="top">
+  <div class="top-left">
+    <div class="top-ch">Ch·04 · Mensuration</div>
+    <div class="top-title">Area of a<br><em>Parallelogram</em></div>
   </div>
-
-  <div class="card">
-    <div class="concept">
-      <strong>The key idea:</strong> cut the triangle off the left side and move it to the right — the parallelogram becomes a rectangle with the same base and height. So <em>Area = base × height</em>, not base × slant side.
-    </div>
-
-    <div class="canvas-wrap">
-      <canvas id="cvs" height="300"></canvas>
-      <div class="canvas-hint">Drag the coloured handles</div>
-    </div>
-
-    <div class="stats-row">
-      <div class="stat-card base">
-        <div class="stat-lbl">Base (b)</div>
-        <div class="stat-val" id="st-base">—</div>
-      </div>
-      <div class="stat-card ht">
-        <div class="stat-lbl">Height (h)</div>
-        <div class="stat-val" id="st-ht">—</div>
-      </div>
-      <div class="stat-card area">
-        <div class="stat-lbl">Area = b × h</div>
-        <div class="stat-val" id="st-area">—</div>
-      </div>
-    </div>
-
-    <div class="formula-box" id="formula-box">
-      Area = base × height<br>
-      <span class="eq" id="formula-eq">= — × — = —</span>
-    </div>
-
-    <div class="insight">
-      <strong>Try this:</strong> drag the shear handle left and right — the shape tilts but the area doesn't change (base and height stay the same). Now pull the height handle up and down — the area changes immediately. Height is perpendicular distance between the parallel sides, not the slant.
+  <div class="top-center">
+    <div class="top-concept">
+      <strong>The cut & slide proof:</strong><br>
+      Slice the left triangle off and slide it to the right — it becomes a rectangle with the same base and height. Area = base × height.
     </div>
   </div>
 </div>
 
+<div class="main">
+  <div class="canvas-area" id="canvas-area">
+    <canvas id="cvs"></canvas>
+  </div>
+  <div class="right">
+    <div class="rp">
+      <div class="rp-lbl">Measurements</div>
+      <div class="stat base"><span class="stat-label">base (b)</span><span class="stat-val" id="st-b">—</span></div>
+      <div class="stat ht"><span class="stat-label">height (h)</span><span class="stat-val" id="st-h">—</span></div>
+      <div class="stat area"><span class="stat-label">area = b × h</span><span class="stat-val" id="st-a">—</span></div>
+    </div>
+    <div class="formula">
+      Area = base × height<br>
+      <strong id="formula-eq">= — × — = —</strong>
+    </div>
+    <div class="insight">
+      <strong>Try this:</strong> drag the shear handle left and right — the shape tilts but the area stays constant. The cut triangle just slides to the other side.<br><br>
+      Now drag the height handle — area changes immediately. Height is the <em>perpendicular</em> distance between the parallel sides, never the slant.
+    </div>
+    <div class="hint">drag coloured handles to reshape</div>
+  </div>
+</div>
+
 <script>
-// ══════════════════════════════════════════
-// STATE  (all in canvas coordinates)
-// ══════════════════════════════════════════
-// Parallelogram defined by:
-//   base: horizontal length (pixels)
-//   ht:   vertical height (pixels)
-//   shear: horizontal offset of the top-left corner from bottom-left (pixels)
-//
-// Bottom-left corner is fixed at (MARGIN, H - MARGIN)
-// Bottom-right: (MARGIN + base, H - MARGIN)
-// Top-left:     (MARGIN + shear, H - MARGIN - ht)
-// Top-right:    (MARGIN + shear + base, H - MARGIN - ht)
+const cvs=document.getElementById('cvs');
+const ctx=cvs.getContext('2d');
+const PR=Math.min(window.devicePixelRatio||1,2);
+const MARGIN=55,SCALE=10;
+const C_BASE='#c04828',C_HT='#b87820',C_SHEAR='#2858a0';
+let W=0,H=0,base=200,ht=120,shear=40,dragging=null;
 
-const PR      = Math.min(window.devicePixelRatio || 1, 2);
-const MARGIN  = 60;   // left/bottom padding inside canvas
-const SCALE   = 10;   // px per "unit" — for display
-
-// Handle colours
-const C_BASE  = '#1d6a72';  // teal
-const C_HT    = '#c08030';  // gold
-const C_SHEAR = '#6a4a90';  // violet
-
-let W = 0, H = 0;   // canvas display size (set by layout)
-
-let base  = 200;    // px
-let ht    = 120;    // px
-let shear = 40;     // px (positive = lean right)
-
-let dragging = null;   // null | 'base' | 'ht' | 'shear'
-let dragOffX = 0, dragOffY = 0;
-
-// ══════════════════════════════════════════
-// DRAW
-// ══════════════════════════════════════════
-function draw() {
-  const canvas = document.getElementById('cvs');
-  W = canvas.parentElement.clientWidth;
-  H = 300;
-  canvas.width  = W * PR;
-  canvas.height = H * PR;
-  canvas.style.width  = W + 'px';
-  canvas.style.height = H + 'px';
-  const ctx = canvas.getContext('2d');
-  ctx.resetTransform();
-  ctx.scale(PR, PR);
-
-  // Warm cream background + dot grid
-  ctx.fillStyle = '#f3f0ea';
-  ctx.fillRect(0, 0, W, H);
-  ctx.fillStyle = 'rgba(180,170,158,.22)';
-  for(let gx = 20; gx < W; gx += 20)
-    for(let gy = 20; gy < H; gy += 20){
-      ctx.beginPath(); ctx.arc(gx, gy, 1.1, 0, Math.PI*2); ctx.fill();
-    }
-
-  // Clamp values so shape stays on canvas
-  const maxBase  = W - MARGIN*2 - Math.abs(shear) - 20;
-  const maxHt    = H - MARGIN*2;
-  base  = Math.max(60,  Math.min(base,  maxBase));
-  ht    = Math.max(40,  Math.min(ht,    maxHt));
-  shear = Math.max(-base*0.6, Math.min(shear, base*0.6));
-
-  const BL = { x: MARGIN, y: H - MARGIN };               // bottom-left
-  const BR = { x: MARGIN + base, y: H - MARGIN };         // bottom-right
-  const TL = { x: MARGIN + shear, y: H - MARGIN - ht };   // top-left
-  const TR = { x: MARGIN + shear + base, y: H-MARGIN-ht };// top-right
-
-  // ── Equivalent rectangle (dashed) ──
-  const RX = Math.min(BL.x, TL.x);
-  ctx.strokeStyle = 'rgba(58,106,72,.3)';
-  ctx.lineWidth   = 1.5;
-  ctx.setLineDash([5,4]);
-  ctx.strokeRect(RX, TL.y, base, ht);
-  ctx.setLineDash([]);
-
-  // ── Cut triangle (left side, filled lightly) ──
-  if(shear > 0){
-    ctx.beginPath();
-    ctx.moveTo(BL.x, BL.y);
-    ctx.lineTo(TL.x, TL.y);
-    ctx.lineTo(BL.x, TL.y);
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(58,106,72,.12)';
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(58,106,72,.35)';
-    ctx.lineWidth = 1;
-    ctx.setLineDash([4,3]);
-    ctx.stroke();
-    ctx.setLineDash([]);
-
-    // Arrow hint: "moves to →"
-    ctx.fillStyle = 'rgba(58,106,72,.45)';
-    ctx.font = '11px DM Sans, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('→', BL.x + shear/2, TL.y + ht/2);
-  } else if(shear < 0){
-    ctx.beginPath();
-    ctx.moveTo(BR.x, BR.y);
-    ctx.lineTo(TR.x, TR.y);
-    ctx.lineTo(BR.x, TR.y);
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(58,106,72,.12)';
-    ctx.fill();
-    ctx.setLineDash([4,3]);
-    ctx.strokeStyle = 'rgba(58,106,72,.35)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    ctx.setLineDash([]);
-  }
-
-  // ── Parallelogram fill ──
-  ctx.beginPath();
-  ctx.moveTo(BL.x, BL.y);
-  ctx.lineTo(BR.x, BR.y);
-  ctx.lineTo(TR.x, TR.y);
-  ctx.lineTo(TL.x, TL.y);
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(58,106,72,.16)';
-  ctx.fill();
-  ctx.strokeStyle = '#3a6a48';
-  ctx.lineWidth = 2.5;
-  ctx.stroke();
-
-  // ── Height line ──
-  const hx = MARGIN + shear + base * 0.5;
-  ctx.strokeStyle = C_HT;
-  ctx.lineWidth   = 1.5;
-  ctx.setLineDash([5,3]);
-  ctx.beginPath();
-  ctx.moveTo(hx, BL.y);
-  ctx.lineTo(hx, TL.y);
-  ctx.stroke();
-  ctx.setLineDash([]);
-
-  // Right-angle box at bottom of height line
-  const sq = 7;
-  ctx.strokeStyle = 'rgba(192,128,48,.7)';
-  ctx.lineWidth   = 1.5;
-  ctx.beginPath();
-  ctx.moveTo(hx + sq, BL.y);
-  ctx.lineTo(hx + sq, BL.y - sq);
-  ctx.lineTo(hx, BL.y - sq);
-  ctx.stroke();
-
-  // Height label
-  ctx.font = 'bold 11px DM Mono, monospace';
-  ctx.fillStyle = C_HT;
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('h=' + fmt1(ht/SCALE), hx + 12, (BL.y + TL.y)/2);
-
-  // ── Base label ──
-  ctx.font = 'bold 11px DM Mono, monospace';
-  ctx.fillStyle = C_BASE;
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'top';
-  ctx.fillText('b=' + fmt1(base/SCALE), (BL.x+BR.x)/2, BL.y + 8);
-
-  // ── Handles ──
-  // Base handle: right-bottom corner
-  drawHandle(ctx, BR.x, BR.y, C_BASE, '→ base');
-  // Shear handle: top-left corner
-  drawHandle(ctx, TL.x, TL.y, C_SHEAR, '↔ shear');
-  // Height handle: midpoint of top edge
-  drawHandle(ctx, hx, TL.y, C_HT, '↕ height');
-
-  // ── Panel update ──
-  const bVal = fmt1(base/SCALE);
-  const hVal = fmt1(ht/SCALE);
-  const aVal = fmt2(base/SCALE * ht/SCALE);
-  document.getElementById('st-base').textContent  = bVal + ' u';
-  document.getElementById('st-ht').textContent    = hVal + ' u';
-  document.getElementById('st-area').textContent  = aVal + ' u²';
-  document.getElementById('formula-eq').textContent =
-    '= ' + bVal + ' × ' + hVal + ' = ' + aVal + ' sq. units';
-}
-
-function drawHandle(ctx, x, y, color, tip){
-  // Glow ring
-  ctx.beginPath();
-  ctx.arc(x, y, 13, 0, Math.PI*2);
-  ctx.fillStyle = color + '20';
-  ctx.fill();
-  // Dot
-  ctx.beginPath();
-  ctx.arc(x, y, 8, 0, Math.PI*2);
-  ctx.fillStyle = color;
-  ctx.fill();
-  ctx.strokeStyle = '#fff';
-  ctx.lineWidth = 2;
-  ctx.stroke();
-  // Tip label
-  ctx.font = 'bold 9.5px DM Sans, sans-serif';
-  ctx.fillStyle = color;
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'bottom';
-  ctx.fillText(tip, x, y - 11);
-}
-
-function fmt1(v){ return v.toFixed(1); }
-function fmt2(v){ return v.toFixed(1); }
-
-// ══════════════════════════════════════════
-// HIT TESTING
-// ══════════════════════════════════════════
-function getHandlePositions(){
-  const BL = { x: MARGIN, y: H - MARGIN };
-  const BR = { x: MARGIN + base, y: H - MARGIN };
-  const TL = { x: MARGIN + shear, y: H - MARGIN - ht };
-  const hx = MARGIN + shear + base*0.5;
-  return {
-    base:  { x: BR.x, y: BR.y },
-    shear: { x: TL.x, y: TL.y },
-    ht:    { x: hx,   y: TL.y },
-  };
-}
-
-function hitTest(mx, my){
-  const handles = getHandlePositions();
-  for(const [name, pos] of Object.entries(handles)){
-    if(Math.hypot(mx - pos.x, my - pos.y) < 20) return name;
-  }
-  return null;
-}
-
-function getPos(e){
-  const rect = document.getElementById('cvs').getBoundingClientRect();
-  const src  = e.touches ? e.touches[0] : e;
-  return { x: src.clientX - rect.left, y: src.clientY - rect.top };
-}
-
-// ══════════════════════════════════════════
-// DRAG
-// ══════════════════════════════════════════
-const canvas = document.getElementById('cvs');
-
-canvas.addEventListener('mousedown', e => {
-  const p = getPos(e);
-  dragging = hitTest(p.x, p.y);
-  dragOffX = p.x; dragOffY = p.y;
-  if(dragging) canvas.style.cursor = 'grabbing';
-});
-window.addEventListener('mousemove', e => {
-  if(!dragging) return;
-  const p = getPos(e);
-  applyDrag(p.x, p.y);
-});
-window.addEventListener('mouseup', () => {
-  dragging = null;
-  canvas.style.cursor = 'crosshair';
-});
-
-canvas.addEventListener('touchstart', e => {
-  const p = getPos(e);
-  dragging = hitTest(p.x, p.y);
-  dragOffX = p.x; dragOffY = p.y;
-  e.preventDefault();
-}, {passive: false});
-window.addEventListener('touchmove', e => {
-  if(!dragging) return;
-  const p = getPos(e);
-  applyDrag(p.x, p.y);
-  e.preventDefault();
-}, {passive: false});
-window.addEventListener('touchend', () => { dragging = null; });
-
-function applyDrag(mx, my){
-  const BL = { x: MARGIN, y: H - MARGIN };
-  if(dragging === 'base'){
-    base = Math.max(60, mx - BL.x);
-  } else if(dragging === 'ht'){
-    ht = Math.max(40, BL.y - my);
-  } else if(dragging === 'shear'){
-    shear = mx - BL.x;
-  }
+function resizeDraw(){
+  const area=document.getElementById('canvas-area');
+  W=area.clientWidth;H=area.clientHeight;
+  cvs.width=W*PR;cvs.height=H*PR;
+  cvs.style.width=W+'px';cvs.style.height=H+'px';
+  ctx.resetTransform();ctx.scale(PR,PR);
   draw();
 }
 
-// ══════════════════════════════════════════
-// RESIZE + INIT
-// ══════════════════════════════════════════
-new ResizeObserver(draw).observe(canvas.parentElement);
-draw();
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  // warm paper background
+  ctx.fillStyle='#e8dcc0';ctx.fillRect(0,0,W,H);
+  // subtle dot grid
+  ctx.fillStyle='rgba(160,140,100,.2)';
+  for(let x=20;x<W;x+=20)for(let y=20;y<H;y+=20){
+    ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);ctx.fill();
+  }
+
+  const maxBase=W-MARGIN*2-Math.abs(shear)-20;
+  const maxHt=H-MARGIN*2;
+  base=Math.max(60,Math.min(base,maxBase));
+  ht=Math.max(40,Math.min(ht,maxHt));
+  shear=Math.max(-base*.6,Math.min(shear,base*.6));
+
+  const BL={x:MARGIN,y:H-MARGIN};
+  const BR={x:MARGIN+base,y:H-MARGIN};
+  const TL={x:MARGIN+shear,y:H-MARGIN-ht};
+  const TR={x:MARGIN+shear+base,y:H-MARGIN-ht};
+
+  // Equivalent rectangle (dashed construction lines)
+  const RX=Math.min(BL.x,TL.x);
+  ctx.setLineDash([5,4]);
+  ctx.strokeStyle='rgba(42,106,58,.4)';ctx.lineWidth=1.5;
+  ctx.strokeRect(RX,TL.y,base,ht);
+  ctx.setLineDash([]);
+
+  // Cut triangle with paper color
+  if(shear>0){
+    ctx.beginPath();
+    ctx.moveTo(BL.x,BL.y);ctx.lineTo(TL.x,TL.y);ctx.lineTo(BL.x,TL.y);ctx.closePath();
+    ctx.fillStyle='rgba(192,72,40,.15)';ctx.fill();
+    ctx.setLineDash([4,3]);
+    ctx.strokeStyle='rgba(192,72,40,.5)';ctx.lineWidth=1.2;ctx.stroke();
+    ctx.setLineDash([]);
+    // Arrow
+    ctx.font='bold 14px serif';ctx.fillStyle='rgba(192,72,40,.5)';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('→',BL.x+shear/2,TL.y+ht/2);
+  } else if(shear<0){
+    ctx.beginPath();
+    ctx.moveTo(BR.x,BR.y);ctx.lineTo(TR.x,TR.y);ctx.lineTo(BR.x,TR.y);ctx.closePath();
+    ctx.fillStyle='rgba(192,72,40,.15)';ctx.fill();
+    ctx.setLineDash([4,3]);ctx.strokeStyle='rgba(192,72,40,.5)';ctx.lineWidth=1.2;ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.font='bold 14px serif';ctx.fillStyle='rgba(192,72,40,.5)';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('←',BR.x+shear/2,TL.y+ht/2);
+  }
+
+  // Parallelogram fill — warm construction paper
+  ctx.beginPath();
+  ctx.moveTo(BL.x,BL.y);ctx.lineTo(BR.x,BR.y);ctx.lineTo(TR.x,TR.y);ctx.lineTo(TL.x,TL.y);ctx.closePath();
+  ctx.fillStyle='rgba(42,106,58,.18)';ctx.fill();
+  ctx.strokeStyle=C_BASE;ctx.lineWidth=2.5;ctx.stroke();
+
+  // Height line
+  const hx=MARGIN+shear+base*0.5;
+  ctx.setLineDash([5,3]);ctx.strokeStyle=C_HT;ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(hx,BL.y);ctx.lineTo(hx,TL.y);ctx.stroke();ctx.setLineDash([]);
+  // Right angle box
+  const sq=7;
+  ctx.strokeStyle=C_HT+'aa';ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.moveTo(hx+sq,BL.y);ctx.lineTo(hx+sq,BL.y-sq);ctx.lineTo(hx,BL.y-sq);ctx.stroke();
+
+  // Labels
+  ctx.font='bold 11px Space Mono,monospace';
+  ctx.fillStyle=C_HT;ctx.textAlign='left';ctx.textBaseline='middle';
+  ctx.fillText('h='+fmt1(ht/SCALE),hx+12,(BL.y+TL.y)/2);
+  ctx.fillStyle=C_BASE;ctx.textAlign='center';ctx.textBaseline='top';
+  ctx.fillText('b='+fmt1(base/SCALE),(BL.x+BR.x)/2,BL.y+8);
+
+  // Handles
+  drawHandle(ctx,BR.x,BR.y,C_BASE,'base →');
+  drawHandle(ctx,TL.x,TL.y,C_SHEAR,'← shear');
+  drawHandle(ctx,hx,TL.y,C_HT,'↕ height');
+
+  // Panel
+  const bV=fmt1(base/SCALE),hV=fmt1(ht/SCALE),aV=fmt2(base/SCALE*ht/SCALE);
+  document.getElementById('st-b').textContent=bV+' u';
+  document.getElementById('st-h').textContent=hV+' u';
+  document.getElementById('st-a').textContent=aV+' u²';
+  document.getElementById('formula-eq').textContent='= '+bV+' × '+hV+' = '+aV+' sq. units';
+}
+
+function drawHandle(ctx,x,y,color,tip){
+  ctx.beginPath();ctx.arc(x,y,14,0,Math.PI*2);
+  ctx.fillStyle=color+'18';ctx.fill();
+  ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);
+  ctx.fillStyle=color;ctx.fill();
+  ctx.strokeStyle='#f8f2e4';ctx.lineWidth=2;ctx.stroke();
+  ctx.font='bold 9px Space Mono,monospace';
+  ctx.fillStyle=color;ctx.textAlign='center';ctx.textBaseline='bottom';
+  ctx.fillText(tip,x,y-11);
+}
+
+function fmt1(v){return v.toFixed(1);}function fmt2(v){return v.toFixed(1);}
+
+function getHandles(){
+  const BL={x:MARGIN,y:H-MARGIN};
+  return{
+    base:{x:MARGIN+base,y:H-MARGIN},
+    shear:{x:MARGIN+shear,y:H-MARGIN-ht},
+    ht:{x:MARGIN+shear+base*0.5,y:H-MARGIN-ht},
+  };
+}
+function hit(mx,my){
+  const h=getHandles();
+  for(const[n,p]of Object.entries(h))if(Math.hypot(mx-p.x,my-p.y)<22)return n;
+  return null;
+}
+function getPos(e){
+  const r=cvs.getBoundingClientRect();
+  const s=e.touches?e.touches[0]:e;
+  return{x:s.clientX-r.left,y:s.clientY-r.top};
+}
+
+cvs.addEventListener('mousedown',e=>{dragging=hit(...Object.values(getPos(e)));if(dragging)cvs.style.cursor='grabbing';});
+window.addEventListener('mousemove',e=>{
+  if(!dragging)return;
+  const p=getPos(e);
+  if(dragging==='base')base=Math.max(60,p.x-MARGIN);
+  else if(dragging==='ht')ht=Math.max(40,H-MARGIN-p.y);
+  else if(dragging==='shear')shear=p.x-MARGIN;
+  draw();
+});
+window.addEventListener('mouseup',()=>{dragging=null;cvs.style.cursor='crosshair';});
+cvs.addEventListener('touchstart',e=>{
+  const p=getPos(e);dragging=hit(p.x,p.y);e.preventDefault();
+},{passive:false});
+window.addEventListener('touchmove',e=>{
+  if(!dragging)return;const p=getPos(e);
+  if(dragging==='base')base=Math.max(60,p.x-MARGIN);
+  else if(dragging==='ht')ht=Math.max(40,H-MARGIN-p.y);
+  else if(dragging==='shear')shear=p.x-MARGIN;
+  draw();e.preventDefault();
+},{passive:false});
+window.addEventListener('touchend',()=>{dragging=null;});
+
+new ResizeObserver(resizeDraw).observe(document.getElementById('canvas-area'));
+resizeDraw();
 </script>
 </body>
 </html>
