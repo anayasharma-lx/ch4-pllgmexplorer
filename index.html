@@ -3,105 +3,158 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Area of Parallelogram — Ganita Prakash Grade 8</title>
+<title>Parallelogram Explorer — Ganita Prakash Grade 8</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --sand:#f8f2e4;--sand2:#f0e8d4;--sand3:#e4d8c0;--sand4:#d4c8a8;
-  --bark:#8a7050;--bark2:#6a5038;--ink:#2a1c08;--ink2:#4a3820;--ink3:#7a6848;
-  --rule:#c8b890;--rule2:#e0d0b0;
-  --terracotta:#c04828;--terracotta-bg:rgba(192,72,40,.1);
-  --forest:#2a6a3a;--forest-bg:rgba(42,106,58,.1);
-  --gold:#b87820;--gold-bg:rgba(184,120,32,.1);
-  --sky:#2858a0;--sky-bg:rgba(40,88,160,.1);
-  --serif:"Instrument Serif",Georgia,serif;--mono:"Space Mono",ui-monospace,monospace;
+  --bg:#fdf8f0;--card:#fff;--canvas:#f2efe8;--ink:#1a1a1a;--ink2:#444;--ink3:#888;
+  --border-c:#e0dcd4;
+  --teal:#1a9e8f;--coral:#e8604c;--gold:#d4920a;
+  --teal-bg:rgba(26,158,143,.12);--coral-bg:rgba(232,96,76,.12);--gold-bg:rgba(212,146,10,.12);
+  --sans:'DM Sans',system-ui,sans-serif;--mono:'DM Mono',monospace;
+  --brd:3px solid var(--ink);--r:14px;
 }
 html,body{width:100%;height:100%;overflow:hidden}
-body{font-family:var(--serif);background:var(--sand);color:var(--ink);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;position:fixed;inset:0}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
-.top{position:relative;z-index:10;border-bottom:2px solid var(--ink);background:var(--sand2);display:flex;align-items:stretch;flex-shrink:0}
-.top-left{padding:10px 18px;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:center;min-width:180px}
-.top-ch{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono)}
-.top-title{font-size:20px;font-weight:400;color:var(--ink)}
-.top-center{flex:1;padding:10px 20px;display:flex;align-items:center}
-.top-concept{font-style:italic;font-size:13px;color:var(--ink3);border-left:2px solid var(--terracotta);padding-left:12px;line-height:1.6}
-.top-concept strong{font-style:normal;color:var(--terracotta);font-family:var(--mono);font-size:10px}
-.main{flex:1;display:grid;grid-template-columns:1fr 220px;overflow:hidden;min-height:0;position:relative;z-index:5}
-.canvas-area{overflow:hidden;background:var(--sand3);cursor:crosshair;touch-action:none;position:relative}
-#cvs{display:block;width:100%;height:100%}
-.right{border-left:1px solid var(--rule);display:flex;flex-direction:column;background:var(--sand2);overflow:hidden}
-.rp{padding:14px 14px;border-bottom:1px solid var(--rule2);flex-shrink:0}
-.rp-lbl{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:8px}
-.stat{display:flex;justify-content:space-between;align-items:baseline;padding:7px 10px;background:var(--sand);border:1px solid var(--rule2);margin-bottom:5px}
-.stat:last-child{margin-bottom:0}
-.stat-label{font-size:11px;color:var(--ink3);font-family:var(--mono)}.stat-val{font-size:18px;font-weight:700;font-family:var(--mono)}
-.stat.area{background:var(--forest-bg);border-color:var(--forest)}.stat.area .stat-val{color:var(--forest)}
-.stat.base .stat-val{color:var(--terracotta)}.stat.ht .stat-val{color:var(--gold)}
-.formula{padding:12px 14px;font-family:var(--mono);font-size:11px;color:var(--ink3);line-height:1.8;border-bottom:1px solid var(--rule2);flex-shrink:0}
-.formula strong{color:var(--forest);font-size:13px}
-.insight{padding:12px 14px;flex:1;overflow-y:auto;font-style:italic;font-size:12px;color:var(--ink3);line-height:1.65}
-.insight strong{font-style:normal;color:var(--terracotta);font-family:var(--mono);font-size:10px}
-.hint{padding:8px 14px;border-top:1px solid var(--rule2);font-size:10px;color:var(--ink3);font-family:var(--mono);letter-spacing:.06em;flex-shrink:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;position:fixed;inset:0}
+.top-strip{display:flex;align-items:center;gap:14px;padding:13px 22px 11px;flex-shrink:0;flex-wrap:wrap;background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.top-strip::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.18) 1px,transparent 1px);background-size:6px 6px;opacity:.5}
+.ts-tag{font-family:var(--mono);font-size:13px;font-weight:700;padding:5px 13px;border-radius:20px;border:2px solid rgba(255,255,255,.35);color:rgba(255,255,255,.7);position:relative;z-index:1}
+.ts-title{font-size:24px;font-weight:800;flex:1;min-width:160px;letter-spacing:-.01em;position:relative;z-index:1}
+.ts-area{position:relative;z-index:1;background:var(--teal);border:3px solid #fff;border-radius:var(--r);padding:6px 18px;transform:rotate(-.5deg)}
+.ts-area span{font-family:var(--mono);font-size:20px;font-weight:700;color:#fff}
 
-/* M */
-@media(max-width:768px){html,body{overflow:auto;height:auto}body{position:static;display:flex;flex-direction:column;min-height:100dvh}.top{flex-wrap:wrap;height:auto}.top-left{padding:8px 14px;min-width:0;border-right:none;border-bottom:1px solid var(--rule)}.top-title{font-size:18px}.top-center{padding:8px 14px;border-left:none}.top-concept{font-size:12px}.main{grid-template-columns:1fr;grid-template-rows:340px auto;overflow:visible}.canvas-area{min-height:340px}.right{border-left:none;border-top:1px solid var(--rule);max-height:none;overflow:visible}.rp{padding:10px 12px}.stat{padding:5px 8px}.stat-val{font-size:15px}.formula{padding:10px 12px;font-size:11px}.insight{font-size:11px;max-height:120px;overflow-y:auto}.hint{padding:6px 12px}}@media(max-width:480px){.top-title{font-size:16px}.stat-val{font-size:14px}.main{grid-template-rows:260px auto}.canvas-area{min-height:260px}}</style>
+.main{flex:1;display:grid;grid-template-columns:260px 1fr;overflow:hidden;min-height:0}
+.left{border-right:var(--brd);display:flex;flex-direction:column;background:var(--bg);overflow:hidden}
+.lp{padding:16px 18px;border-bottom:2px solid var(--border-c);flex-shrink:0}
+.lp-lbl{font-size:12px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+
+.stat-card{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:2px solid var(--border-c);border-radius:12px;margin-bottom:8px;background:var(--card)}
+.stat-card:last-child{margin-bottom:0}
+.sc-label{font-size:14px;color:var(--ink2);font-weight:600}
+.sc-val{font-family:var(--mono);font-size:20px;font-weight:700}
+.stat-card.area{border-color:var(--teal);background:var(--teal-bg)}
+.stat-card.area .sc-val{color:var(--teal)}
+.stat-card.base .sc-val{color:var(--coral)}
+.stat-card.ht .sc-val{color:var(--gold)}
+
+.formula-box{padding:16px 18px;border-bottom:2px solid var(--border-c);flex-shrink:0}
+.fb-lbl{font-size:12px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.fb-eq{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--teal);line-height:1.6}
+
+.insight-box{padding:16px 18px;flex:1;overflow-y:auto;font-size:14px;color:var(--ink2);line-height:1.7}
+.insight-box strong{color:var(--ink);font-weight:700}
+.hint-bar{padding:10px 18px;border-top:2px solid var(--border-c);font-size:13px;color:var(--ink3);font-family:var(--mono);flex-shrink:0}
+
+.right{background:var(--canvas);overflow:hidden;cursor:crosshair;touch-action:none;position:relative}
+canvas{display:block;width:100%;height:100%}
+
+@media(max-width:768px){
+  html,body{overflow:auto;height:auto}body{position:static;min-height:100dvh}
+  .main{grid-template-columns:1fr;grid-template-rows:auto 340px}
+  .left{border-right:none;border-bottom:var(--brd);overflow:visible}
+  .right{min-height:340px}
+}
+</style>
 </head>
 <body>
-<div class="top">
-  <div class="top-left"><div class="top-ch">Ch-04 Mensuration</div><div class="top-title">Area of a<br><em>Parallelogram</em></div></div>
-  <div class="top-center"><div class="top-concept"><strong>The cut and slide proof:</strong><br>Slice the left triangle off and slide it to the right — it becomes a rectangle with the same base and height. Area = base x height.</div></div>
+<div class="top-strip">
+  <span class="ts-tag">Ch 4</span>
+  <div class="ts-title">Parallelogram Explorer</div>
+  <div class="ts-area"><span id="ts-area-val">— sq. units</span></div>
 </div>
 <div class="main">
-  <div class="canvas-area" id="canvas-area"><canvas id="cvs"></canvas></div>
-  <div class="right">
-    <div class="rp"><div class="rp-lbl">Measurements</div>
-      <div class="stat base"><span class="stat-label">base (b)</span><span class="stat-val" id="st-b">-</span></div>
-      <div class="stat ht"><span class="stat-label">height (h)</span><span class="stat-val" id="st-h">-</span></div>
-      <div class="stat area"><span class="stat-label">area = b x h</span><span class="stat-val" id="st-a">-</span></div>
+  <div class="left">
+    <div class="lp">
+      <div class="lp-lbl">Live measurements</div>
+      <div class="stat-card base"><span class="sc-label">Base (b)</span><span class="sc-val" id="st-b">—</span></div>
+      <div class="stat-card ht"><span class="sc-label">Height (h)</span><span class="sc-val" id="st-h">—</span></div>
+      <div class="stat-card area"><span class="sc-label">Area = b × h</span><span class="sc-val" id="st-a">—</span></div>
     </div>
-    <div class="formula">Area = base x height<br><strong id="formula-eq">= - x - = -</strong></div>
-    <div class="insight"><strong>Try this:</strong> drag the shear handle left and right — the shape tilts but the area stays constant. The cut triangle just slides to the other side.<br><br>Now drag the height handle — area changes immediately. Height is the <em>perpendicular</em> distance between the parallel sides, never the slant.</div>
-    <div class="hint">drag coloured handles to reshape</div>
+    <div class="formula-box">
+      <div class="fb-lbl">Formula</div>
+      <div class="fb-eq" id="fb-eq">Area = base × height</div>
+    </div>
+    <div class="insight-box">
+      <strong>The cut-and-slide proof:</strong><br>
+      Drag the <strong style="color:var(--sky,#3d8fd6)">shear handle</strong> — the shape tilts but area stays constant. The left triangle just slides to the right to complete a rectangle.<br><br>
+      Drag the <strong style="color:var(--gold)">height handle</strong> — area changes immediately. Height is the <em>perpendicular</em> distance between the parallel sides, never the slant side.
+    </div>
+    <div class="hint-bar">← drag coloured handles to reshape →</div>
   </div>
+  <div class="right" id="canvas-area"><canvas id="cvs"></canvas></div>
 </div>
 <script>
-const cvs=document.getElementById("cvs"),ctx=cvs.getContext("2d");
+const cvs=document.getElementById('cvs'),ctx=cvs.getContext('2d');
 const PR=Math.min(window.devicePixelRatio||1,2);
-const MARGIN=55,SCALE=10;
-const C_BASE="#c04828",C_HT="#b87820",C_SHEAR="#2858a0";
-let W=0,H=0,base=200,ht=120,shear=40,dragging=null;
-function resizeDraw(){const area=document.getElementById("canvas-area");W=area.clientWidth;H=area.clientHeight;cvs.width=W*PR;cvs.height=H*PR;cvs.style.width=W+"px";cvs.style.height=H+"px";ctx.resetTransform();ctx.scale(PR,PR);draw();}
+const MARGIN=60,SCALE=10;
+const C_BASE='#e8604c',C_HT='#d4920a',C_SHEAR='#3d8fd6';
+let W=0,H=0,base=200,ht=130,shear=40,dragging=null;
+function fmt1(v){return v.toFixed(1);}
+function resize(){const area=document.getElementById('canvas-area');W=area.clientWidth;H=area.clientHeight;cvs.width=W*PR;cvs.height=H*PR;cvs.style.width=W+'px';cvs.style.height=H+'px';ctx.resetTransform();ctx.scale(PR,PR);draw();}
 function draw(){
-  ctx.clearRect(0,0,W,H);ctx.fillStyle="#e8dcc0";ctx.fillRect(0,0,W,H);
-  ctx.fillStyle="rgba(160,140,100,.2)";for(let x=20;x<W;x+=20)for(let y=20;y<H;y+=20){ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);ctx.fill();}
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#f2efe8';ctx.fillRect(0,0,W,H);
+  // dot grid
+  ctx.fillStyle='#ccc8be';for(let x=0;x<W;x+=24)for(let y=0;y<H;y+=24){ctx.beginPath();ctx.arc(x,y,1.2,0,Math.PI*2);ctx.fill();}
   const maxBase=W-MARGIN*2-Math.abs(shear)-20,maxHt=H-MARGIN*2;
   base=Math.max(60,Math.min(base,maxBase));ht=Math.max(40,Math.min(ht,maxHt));shear=Math.max(-base*.6,Math.min(shear,base*.6));
-  const BL={x:MARGIN,y:H-MARGIN},BR={x:MARGIN+base,y:H-MARGIN},TL={x:MARGIN+shear,y:H-MARGIN-ht},TR={x:MARGIN+shear+base,y:H-MARGIN-ht};
-  const RX=Math.min(BL.x,TL.x);ctx.setLineDash([5,4]);ctx.strokeStyle="rgba(42,106,58,.4)";ctx.lineWidth=1.5;ctx.strokeRect(RX,TL.y,base,ht);ctx.setLineDash([]);
-  if(shear>0){ctx.beginPath();ctx.moveTo(BL.x,BL.y);ctx.lineTo(TL.x,TL.y);ctx.lineTo(BL.x,TL.y);ctx.closePath();ctx.fillStyle="rgba(192,72,40,.15)";ctx.fill();ctx.setLineDash([4,3]);ctx.strokeStyle="rgba(192,72,40,.5)";ctx.lineWidth=1.2;ctx.stroke();ctx.setLineDash([]);ctx.font="bold 14px serif";ctx.fillStyle="rgba(192,72,40,.5)";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("->",BL.x+shear/2,TL.y+ht/2);}
-  else if(shear<0){ctx.beginPath();ctx.moveTo(BR.x,BR.y);ctx.lineTo(TR.x,TR.y);ctx.lineTo(BR.x,TR.y);ctx.closePath();ctx.fillStyle="rgba(192,72,40,.15)";ctx.fill();ctx.setLineDash([4,3]);ctx.strokeStyle="rgba(192,72,40,.5)";ctx.lineWidth=1.2;ctx.stroke();ctx.setLineDash([]);ctx.font="bold 14px serif";ctx.fillStyle="rgba(192,72,40,.5)";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("<-",BR.x+shear/2,TL.y+ht/2);}
-  ctx.beginPath();ctx.moveTo(BL.x,BL.y);ctx.lineTo(BR.x,BR.y);ctx.lineTo(TR.x,TR.y);ctx.lineTo(TL.x,TL.y);ctx.closePath();ctx.fillStyle="rgba(42,106,58,.18)";ctx.fill();ctx.strokeStyle=C_BASE;ctx.lineWidth=2.5;ctx.stroke();
-  const hx=MARGIN+shear+base*0.5;ctx.setLineDash([5,3]);ctx.strokeStyle=C_HT;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(hx,BL.y);ctx.lineTo(hx,TL.y);ctx.stroke();ctx.setLineDash([]);
-  const sq=7;ctx.strokeStyle=C_HT+"aa";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(hx+sq,BL.y);ctx.lineTo(hx+sq,BL.y-sq);ctx.lineTo(hx,BL.y-sq);ctx.stroke();
-  ctx.font="bold 11px Space Mono,monospace";ctx.fillStyle=C_HT;ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText("h="+fmt1(ht/SCALE),hx+12,(BL.y+TL.y)/2);ctx.fillStyle=C_BASE;ctx.textAlign="center";ctx.textBaseline="top";ctx.fillText("b="+fmt1(base/SCALE),(BL.x+BR.x)/2,BL.y+8);
-  drawHandle(ctx,BR.x,BR.y,C_BASE,"base ->");drawHandle(ctx,TL.x,TL.y,C_SHEAR,"<- shear");drawHandle(ctx,hx,TL.y,C_HT,"↕ height");
-  const bV=fmt1(base/SCALE),hV=fmt1(ht/SCALE),aV=fmt2(base/SCALE*ht/SCALE);
-  document.getElementById("st-b").textContent=bV+" u";document.getElementById("st-h").textContent=hV+" u";document.getElementById("st-a").textContent=aV+" u2";document.getElementById("formula-eq").textContent="= "+bV+" x "+hV+" = "+aV+" sq. units";
+  const BL={x:MARGIN,y:H-MARGIN},BR={x:MARGIN+base,y:H-MARGIN};
+  const TL={x:MARGIN+shear,y:H-MARGIN-ht},TR={x:MARGIN+shear+base,y:H-MARGIN-ht};
+  // ghost rectangle
+  const RX=Math.min(BL.x,TL.x);
+  ctx.setLineDash([6,4]);ctx.strokeStyle='rgba(26,158,143,.4)';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.rect(RX,TL.y,base,ht);ctx.stroke();ctx.setLineDash([]);
+  // slide triangle arrow
+  if(Math.abs(shear)>5){
+    ctx.beginPath();
+    if(shear>0){ctx.moveTo(BL.x,BL.y);ctx.lineTo(TL.x,TL.y);ctx.lineTo(BL.x,TL.y);}
+    else{ctx.moveTo(BR.x,BR.y);ctx.lineTo(TR.x,TR.y);ctx.lineTo(BR.x,TR.y);}
+    ctx.closePath();ctx.fillStyle='rgba(232,96,76,.12)';ctx.fill();
+    ctx.setLineDash([5,4]);ctx.strokeStyle='rgba(232,96,76,.5)';ctx.lineWidth=1.5;ctx.stroke();ctx.setLineDash([]);
+  }
+  // parallelogram
+  ctx.beginPath();ctx.moveTo(BL.x,BL.y);ctx.lineTo(BR.x,BR.y);ctx.lineTo(TR.x,TR.y);ctx.lineTo(TL.x,TL.y);ctx.closePath();
+  ctx.fillStyle='rgba(26,158,143,.15)';ctx.fill();
+  ctx.strokeStyle='#1a1a1a';ctx.lineWidth=3;ctx.stroke();
+  // height line
+  const hx=MARGIN+shear+base*0.5;
+  ctx.setLineDash([6,4]);ctx.strokeStyle=C_HT;ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.moveTo(hx,BL.y);ctx.lineTo(hx,TL.y);ctx.stroke();ctx.setLineDash([]);
+  const sq=10;ctx.strokeStyle=C_HT+'bb';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(hx+sq,BL.y);ctx.lineTo(hx+sq,BL.y-sq);ctx.lineTo(hx,BL.y-sq);ctx.stroke();
+  // labels
+  ctx.font='bold 14px DM Mono,monospace';
+  ctx.fillStyle=C_HT;ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText('h='+fmt1(ht/SCALE),hx+16,(BL.y+TL.y)/2);
+  ctx.fillStyle=C_BASE;ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText('b='+fmt1(base/SCALE),(BL.x+BR.x)/2,BL.y+10);
+  // handles
+  function handle(x,y,col,tip){
+    ctx.beginPath();ctx.arc(x,y,18,0,Math.PI*2);ctx.fillStyle=col+'20';ctx.fill();
+    ctx.beginPath();ctx.arc(x,y,10,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();
+    ctx.strokeStyle='#fff';ctx.lineWidth=2.5;ctx.stroke();
+    ctx.font='bold 11px DM Mono,monospace';ctx.fillStyle=col;ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText(tip,x,y-14);
+  }
+  handle(BR.x,BR.y,C_BASE,'base →');
+  handle(TL.x,TL.y,C_SHEAR,'← shear');
+  handle(hx,TL.y,C_HT,'↕ height');
+  // update stats
+  const bV=fmt1(base/SCALE),hV=fmt1(ht/SCALE),aV=fmt1(base/SCALE*ht/SCALE);
+  document.getElementById('st-b').textContent=bV+' u';
+  document.getElementById('st-h').textContent=hV+' u';
+  document.getElementById('st-a').textContent=aV+' sq. u';
+  document.getElementById('ts-area-val').textContent=aV+' sq. units';
+  document.getElementById('fb-eq').textContent='= '+bV+' × '+hV+' = '+aV+' sq. units';
 }
-function drawHandle(ctx,x,y,color,tip){ctx.beginPath();ctx.arc(x,y,14,0,Math.PI*2);ctx.fillStyle=color+"18";ctx.fill();ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();ctx.strokeStyle="#f8f2e4";ctx.lineWidth=2;ctx.stroke();ctx.font="bold 9px Space Mono,monospace";ctx.fillStyle=color;ctx.textAlign="center";ctx.textBaseline="bottom";ctx.fillText(tip,x,y-11);}
-function fmt1(v){return v.toFixed(1);}function fmt2(v){return v.toFixed(1);}
 function getHandles(){return{base:{x:MARGIN+base,y:H-MARGIN},shear:{x:MARGIN+shear,y:H-MARGIN-ht},ht:{x:MARGIN+shear+base*0.5,y:H-MARGIN-ht}};}
-function hit(mx,my){const h=getHandles();for(const[n,p]of Object.entries(h))if(Math.hypot(mx-p.x,my-p.y)<22)return n;return null;}
+function hit(mx,my){const h=getHandles();for(const[n,p]of Object.entries(h))if(Math.hypot(mx-p.x,my-p.y)<26)return n;return null;}
 function getPos(e){const r=cvs.getBoundingClientRect(),s=e.touches?e.touches[0]:e;return{x:s.clientX-r.left,y:s.clientY-r.top};}
-cvs.addEventListener("mousedown",e=>{dragging=hit(...Object.values(getPos(e)));if(dragging)cvs.style.cursor="grabbing";});
-window.addEventListener("mousemove",e=>{if(!dragging)return;const p=getPos(e);if(dragging==="base")base=Math.max(60,p.x-MARGIN);else if(dragging==="ht")ht=Math.max(40,H-MARGIN-p.y);else if(dragging==="shear")shear=p.x-MARGIN;draw();});
-window.addEventListener("mouseup",()=>{dragging=null;cvs.style.cursor="crosshair";});
-cvs.addEventListener("touchstart",e=>{const p=getPos(e);dragging=hit(p.x,p.y);e.preventDefault();},{passive:false});
-window.addEventListener("touchmove",e=>{if(!dragging)return;const p=getPos(e);if(dragging==="base")base=Math.max(60,p.x-MARGIN);else if(dragging==="ht")ht=Math.max(40,H-MARGIN-p.y);else if(dragging==="shear")shear=p.x-MARGIN;draw();e.preventDefault();},{passive:false});
-window.addEventListener("touchend",()=>{dragging=null;});
-new ResizeObserver(resizeDraw).observe(document.getElementById("canvas-area"));resizeDraw();
+cvs.addEventListener('mousedown',e=>{dragging=hit(...Object.values(getPos(e)));if(dragging)cvs.style.cursor='grabbing';});
+window.addEventListener('mousemove',e=>{if(!dragging)return;const p=getPos(e);if(dragging==='base')base=Math.max(60,p.x-MARGIN);else if(dragging==='ht')ht=Math.max(40,H-MARGIN-p.y);else if(dragging==='shear')shear=p.x-MARGIN;draw();});
+window.addEventListener('mouseup',()=>{dragging=null;cvs.style.cursor='crosshair';});
+cvs.addEventListener('touchstart',e=>{const p=getPos(e);dragging=hit(p.x,p.y);e.preventDefault();},{passive:false});
+window.addEventListener('touchmove',e=>{if(!dragging)return;const p=getPos(e);if(dragging==='base')base=Math.max(60,p.x-MARGIN);else if(dragging==='ht')ht=Math.max(40,H-MARGIN-p.y);else if(dragging==='shear')shear=p.x-MARGIN;draw();e.preventDefault();},{passive:false});
+window.addEventListener('touchend',()=>{dragging=null;});
+new ResizeObserver(resize).observe(document.getElementById('canvas-area'));resize();
 </script>
 </body>
 </html>
